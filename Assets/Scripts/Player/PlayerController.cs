@@ -26,7 +26,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float minXRot = -10f;
     [SerializeField] private float smoothTime = 0.05f;
 
-    
+    Rigidbody rb;
+
     private PlayerAnimation PlayerAnimation;
     private CharacterController characterController;
 
@@ -40,6 +41,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        rb = GetComponent<Rigidbody>();
         characterController = GetComponent<CharacterController>();
         PlayerAnimation = GetComponent<PlayerAnimation>();
   

@@ -40,9 +40,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7343297438607370222}
-  - component: {fileID: 7738364570364168180}
   - component: {fileID: 2260492844146160465}
+  - component: {fileID: 2575558298192403015}
   - component: {fileID: 3028299660603319596}
+  - component: {fileID: 7738364570364168180}
+  - component: {fileID: 7366102370131598907}
+  - component: {fileID: 7209048334111502019}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -66,33 +69,6 @@ Transform:
   - {fileID: 6481317080742797229}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7738364570364168180
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2399515559069285830}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14ffd58bf63d36a41aee56b73962765d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  BulletPrefeb: {fileID: 0}
-  FirePosition: {fileID: 0}
-  FireSpeed: 0
-  target: {fileID: 0}
-  topCannon: {fileID: 0}
-  bottomCannon: {fileID: 0}
-  moveSpeed: 4
-  rotationSpeed: 20
-  jumpForce: 5
-  groundDistance: 0.5
-  turnSpeed: 0.05
-  maxXRot: 35
-  minXRot: -90
-  smoothTime: 0.05
-  PlayerAnimation: {fileID: 0}
 --- !u!54 &2260492844146160465
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -120,6 +96,27 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!65 &2575558298192403015
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2399515559069285830}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.3490806, y: 1.0285038, z: 1}
+  m_Center: {x: 0.27208352, y: 0.5130717, z: 0}
 --- !u!143 &3028299660603319596
 CharacterController:
   m_ObjectHideFlags: 0
@@ -146,6 +143,59 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &7738364570364168180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2399515559069285830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14ffd58bf63d36a41aee56b73962765d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BulletPrefeb: {fileID: 0}
+  FirePosition: {fileID: 0}
+  FireSpeed: 0
+  target: {fileID: 0}
+  topCannon: {fileID: 0}
+  bottomCannon: {fileID: 0}
+  moveSpeed: 4
+  rotationSpeed: 20
+  jumpForce: 5
+  groundDistance: 0.5
+  turnSpeed: 0.05
+  maxXRot: 35
+  minXRot: -90
+  smoothTime: 0.05
+--- !u!114 &7366102370131598907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2399515559069285830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a1f999df31a0046a3e985600ee9f8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 0
+  maxHealth: 5
+--- !u!114 &7209048334111502019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2399515559069285830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c2d18c50107a2b41b6437ee04954226, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 1086052914619041239}
 --- !u!1001 &6807466774945462342
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -206,6 +256,11 @@ PrefabInstance:
       addedObject: {fileID: 6285169899129522037}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7a6ea2db6aa06a84c81bca17d2622ec4, type: 3}
+--- !u!95 &1086052914619041239 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 7a6ea2db6aa06a84c81bca17d2622ec4, type: 3}
+  m_PrefabInstance: {fileID: 6807466774945462342}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6481317080742797229 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 7a6ea2db6aa06a84c81bca17d2622ec4, type: 3}
