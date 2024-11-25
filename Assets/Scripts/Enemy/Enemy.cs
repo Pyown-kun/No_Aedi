@@ -2,12 +2,20 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class Enemy : MonoBehaviour
 {
+    [Header("Enemy Set Up")]
+    public EnemyAnimation EnemyAnimation;
+    public GameObject EnemyBody;
+    public VisualEffect SpawnVisualEffect;
+    private Collider capsulCollider;
+
     [Header("Health")]
     [SerializeField] float health;
     [SerializeField] float maxHealth;
+    bool cantHit;
 
     [Header("Weopon")]
     public GameObject BulletPrefeb;
@@ -37,23 +45,30 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         health = maxHealth;
-        
+        bulletTimer = Timer;
+
         fieldOfView = GetComponent<FieldOfView>();
-
         rb = GetComponent<Rigidbody>();
-        
-        enemyState = EnemyState.Idle;
+        EnemyAnimation = GetComponent<EnemyAnimation>();
 
+        capsulCollider = GetComponent<Collider>();
+        SpawnVisualEffect.Play();
+        enemyState = EnemyState.Spawn;
     }
 
     private void Update()
     {
         switch (enemyState)
         {
+            case EnemyState.Spawn:
+                StartCoroutine(Spawn());
+                break;
             case EnemyState.Idle:
+                EnemyAnimation.Idle();
                 Idle();
                 break;
             case EnemyState.Attack:
+                EnemyAnimation.Attack();
                 Attack();
                 break;
             case EnemyState.Destroy:
@@ -61,6 +76,30 @@ public class Enemy : MonoBehaviour
                 break;
         }
 
+    }
+
+    IEnumerator Spawn()
+    {
+        Debug.Log("Spawn");
+        cantHit = true;
+
+        yield return new WaitForSeconds(1.4f);
+        
+        EnemyBody.SetActive(true);
+        capsulCollider.enabled = true;
+
+        yield return new WaitForSeconds(1.5f);
+
+        if (!fieldOfView.CanSeePlayer)
+        {
+            cantHit = false;
+            enemyState = EnemyState.Idle;
+        }
+        else if (fieldOfView.CanSeePlayer)
+        {
+            cantHit = false;
+            enemyState = EnemyState.Attack;
+        }
     }
 
     private void DestroyEnemy()
@@ -94,6 +133,7 @@ public class Enemy : MonoBehaviour
         {
             enemyState = EnemyState.Destroy;
         }
+
         WeaponControl();
     }
 
@@ -150,11 +190,14 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(float damageAmount)
     {
-        health -= damageAmount;
+        if (!cantHit) 
+        { 
+            health -= damageAmount;
 
-        if (health <= 0)
-        {
-            destroy = true;
+            if (health <= 0)
+            {
+                destroy = true;
+            }
         }
     }
 
@@ -162,6 +205,7 @@ public class Enemy : MonoBehaviour
     {
         Attack,
         Destroy,
+        Spawn,
         Idle
     }
 }

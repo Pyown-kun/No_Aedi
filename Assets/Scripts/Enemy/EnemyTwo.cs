@@ -35,6 +35,7 @@ public class EnemyTwo : MonoBehaviour
     void Start()
     {
         health = maxHealth;
+        bulletTimer = Timer;
 
         rb = GetComponent<Rigidbody>();
         
